@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+
+// int sum(int n){
+//     if(n==0){
+//         return 0;
+//     }
+//     else{
+//         return n*n*n+sum(n-1);
+//     }
+// }
+// int main(){
+//     int n;
+//     cin>>n;
+//     cout<<sum(n);
+//     return 0;
+// }
+
+int sumOfSeries(int n){
+
+    if(n<1){
+        return 0;
+    }
+    else{
+        return n*n*n + sumOfSeries(n-1);
+    }
+}
+int main(){
+    int n;
+    cin>>n;
+    cout<<sumOfSeries(n);
+    return 0;
+}
