@@ -1,39 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution
+int searchInRotated(vector<int> &nums, int target)
 {
-public:
-  int search(vector<int> &nums, int target)
+  int n = nums.size();
+  int low = 0, high = n - 1;
+
+  while (low <= high)
   {
-    int n = nums.size();
-    int low = 0, high = n - 1;
+    int mid = (low + high) / 2;
 
-    while (low <= high)
+    if (nums[mid] == target)
+      return mid;
+
+    // Left half is sorted
+    if (nums[low] <= nums[mid])
     {
-      int mid = (low + high) / 2;
-
-      if (nums[mid] == target)
-        return mid;
-
-      // Left half is sorted
-      if (nums[low] <= nums[mid])
-      {
-        if (nums[low] <= target && target < nums[mid])
-          high = mid - 1;
-        else
-          low = mid + 1;
-      }
-      // Right half is sorted
+      if (nums[low] <= target && target < nums[mid])
+        high = mid - 1;
       else
-      {
-        if (nums[mid] < target && target <= nums[high])
-          low = mid + 1;
-        else
-          high = mid - 1;
-      }
+        low = mid + 1;
     }
-
-    return -1;
+    // Right half is sorted
+    else
+    {
+      if (nums[mid] < target && target <= nums[high])
+        low = mid + 1;
+      else
+        high = mid - 1;
+    }
   }
-};
+
+  return -1;
+}
+
+int main()
+{
+  vector<int> nums = {4, 5, 6, 7, 0, 1, 2};
+  int target = 0;
+  int result = searchInRotated(nums, target);
+  if (result != -1)
+    cout << "Found at index: " << result << "\n";
+  else
+    cout << "Not found\n";
+  return 0;
+}

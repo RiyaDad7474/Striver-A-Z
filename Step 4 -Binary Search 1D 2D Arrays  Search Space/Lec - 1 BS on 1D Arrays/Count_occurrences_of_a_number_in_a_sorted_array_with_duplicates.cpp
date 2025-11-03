@@ -1,14 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int firstOccurance(vector<int> arr, int n, int k)
+int firstOccurrence(const vector<int> &arr, int n, int k)
 {
   int low = 0, high = n - 1;
   int first = -1;
   while (low <= high)
   {
-    int mid = (low + high) / 2;
-
+    int mid = low + (high - low) / 2;
     if (arr[mid] == k)
     {
       first = mid;
@@ -19,18 +18,20 @@ int firstOccurance(vector<int> arr, int n, int k)
       low = mid + 1;
     }
     else
+    {
       high = mid - 1;
+    }
   }
   return first;
 }
-int lastOccurance(vector<int> arr, int n, int k)
+
+int lastOccurrence(const vector<int> &arr, int n, int k)
 {
   int low = 0, high = n - 1;
   int last = -1;
   while (low <= high)
   {
-    int mid = (low + high) / 2;
-    // maybe an answer
+    int mid = low + (high - low) / 2;
     if (arr[mid] == k)
     {
       last = mid;
@@ -41,24 +42,38 @@ int lastOccurance(vector<int> arr, int n, int k)
       low = mid + 1;
     }
     else
+    {
       high = mid - 1;
+    }
   }
   return last;
 }
 
-pair<int, int> firstAndLastPosition(vector<int> &arr, int n, int k)
+pair<int, int> firstAndLastPosition(const vector<int> &arr, int n, int k)
 {
-  int first = firstOccurance(arr, n, k);
+  int first = firstOccurrence(arr, n, k);
   if (first == -1)
     return {-1, -1};
-  int last = lastOccurance(arr, n, k);
+  int last = lastOccurrence(arr, n, k);
   return {first, last};
 }
 
-int count(vector<int> &arr, int n, int x)
+int countOccurrences(const vector<int> &arr, int n, int x)
 {
-  pair<int, int> ans = firstAndLastPosition(arr, n, x);
-  if (ans.first == -1)
+  auto pos = firstAndLastPosition(arr, n, x);
+  if (pos.first == -1)
     return 0;
-  return ans.second - ans.first + 1;
+  return pos.second - pos.first + 1;
+}
+
+int main()
+{
+  vector<int> arr = {1, 2, 4, 7, 7, 9};
+  int x = 7;
+  int n = arr.size();
+  auto pos = firstAndLastPosition(arr, n, x);
+  cout << "First occurrence of " << x << " is: " << pos.first << "\n";
+  cout << "Last occurrence of " << x << " is: " << pos.second << "\n";
+  cout << "Count of " << x << " is: " << countOccurrences(arr, n, x) << "\n";
+  return 0;
 }

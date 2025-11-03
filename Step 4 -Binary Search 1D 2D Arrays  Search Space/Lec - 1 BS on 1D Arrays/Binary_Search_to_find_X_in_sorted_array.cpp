@@ -1,18 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int search(vector<int> &nums, int target)
+int bsRecursive(const vector<int> &nums, int low, int high, int target)
 {
-  // Write your code here.
+  if (low > high)
+    return -1;
+  int mid = low + (high - low) / 2;
+  if (nums[mid] == target)
+    return mid;
+  else if (nums[mid] < target)
+    return bsRecursive(nums, mid + 1, high, target);
+  else
+    return bsRecursive(nums, low, mid - 1, target);
+}
+
+int searchIterative(const vector<int> &nums, int target)
+{
   int n = nums.size();
-  int low = 0;
-  int high = n - 1;
+  int low = 0, high = n - 1;
   while (low <= high)
   {
-    int mid = (low + high) / 2;
+    int mid = low + (high - low) / 2;
     if (nums[mid] == target)
       return mid;
-    else if (target > nums[mid])
+    else if (nums[mid] < target)
       low = mid + 1;
     else
       high = mid - 1;
@@ -20,20 +31,17 @@ int search(vector<int> &nums, int target)
   return -1;
 }
 
-int bs(vector<int> &nums, int low, int high, int target)
+int main()
 {
-  if (low > high)
-    return -1;
-  int mid = (low + high) / 2;
-  if (nums[mid] == target)
-    return mid;
-  else if (target > nums[mid])
-    return bs(nums, mid + 1, high, target);
-  return bs(nums, low, high - 1, target);
-}
-int search(vector<int> &nums, int target)
-{
-  return bs(nums, 0, nums.size(), target);
-}
+  vector<int> nums = {1, 2, 4, 7, 9};
+  int target = 4;
 
-// time complexicity = O(log base 2 n)
+  // Choose one:
+  int result1 = searchIterative(nums, target);
+  cout << "Iterative: index = " << result1 << "\n";
+
+  int result2 = bsRecursive(nums, 0, nums.size() - 1, target);
+  cout << "Recursive: index = " << result2 << "\n";
+
+  return 0;
+}

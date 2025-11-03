@@ -1,14 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int firstOccurance(vector<int> arr, int n, int k)
+int firstOccurrence(const vector<int> &arr, int n, int k)
 {
   int low = 0, high = n - 1;
   int first = -1;
   while (low <= high)
   {
     int mid = (low + high) / 2;
-
     if (arr[mid] == k)
     {
       first = mid;
@@ -19,18 +18,20 @@ int firstOccurance(vector<int> arr, int n, int k)
       low = mid + 1;
     }
     else
+    {
       high = mid - 1;
+    }
   }
   return first;
 }
-int lastOccurance(vector<int> arr, int n, int k)
+
+int lastOccurrence(const vector<int> &arr, int n, int k)
 {
   int low = 0, high = n - 1;
   int last = -1;
   while (low <= high)
   {
     int mid = (low + high) / 2;
-    // maybe an answer
     if (arr[mid] == k)
     {
       last = mid;
@@ -41,16 +42,31 @@ int lastOccurance(vector<int> arr, int n, int k)
       low = mid + 1;
     }
     else
+    {
       high = mid - 1;
+    }
   }
   return last;
 }
 
-pair<int, int> firstAndLastPosition(vector<int> &arr, int n, int k)
+pair<int, int> firstAndLastPosition(const vector<int> &arr, int n, int k)
 {
-  int first = firstOccurance(arr, n, k);
+  int first = firstOccurrence(arr, n, k);
   if (first == -1)
+  {
     return {-1, -1};
-  int last = lastOccurance(arr, n, k);
+  }
+  int last = lastOccurrence(arr, n, k);
   return {first, last};
+}
+
+int main()
+{
+  vector<int> arr = {1, 2, 4, 7, 7, 9};
+  int k = 7;
+  int n = arr.size();
+  pair<int, int> res = firstAndLastPosition(arr, n, k);
+  cout << "First occurrence of " << k << " : " << res.first << "\n";
+  cout << "Last occurrence of " << k << " : " << res.second << "\n";
+  return 0;
 }

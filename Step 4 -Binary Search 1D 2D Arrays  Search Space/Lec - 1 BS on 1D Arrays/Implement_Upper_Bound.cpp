@@ -23,3 +23,14 @@ int upperBound(vector<int> arr, int n, int x)
 }
 
 // ub = upper_bound(arr.begin(), arr.end(), n) - arr.begin();
+
+int main()
+{
+
+  vector<int> arr = {1, 2, 4, 7, 7, 9};
+  int x = 7;
+  int n = arr.size();
+  int result = upperBound(arr, n, x);
+  cout << "upper bound index for " << x << " is " << result;
+  return 0;
+}
