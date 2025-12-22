@@ -8,7 +8,6 @@ bool isAnagram(string s, string t)
 
   return s == t;
 }
-
 int main()
 {
   string s = "anagram", t = "nagaram";
