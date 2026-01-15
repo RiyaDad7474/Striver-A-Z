@@ -30,7 +30,7 @@ int main()
   double x;
   int n;
   cin >> x >> n;
-  int result = myPow(x, n);
+  double result = myPow(x, n);
   cout << result << endl;
   return 0;
 }
