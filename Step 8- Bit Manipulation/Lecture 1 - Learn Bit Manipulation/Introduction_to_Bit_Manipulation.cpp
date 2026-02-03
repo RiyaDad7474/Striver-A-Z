@@ -20,6 +20,9 @@ using namespace std;
 //   return res;
 // }
 
+// TC = O(log base 2 n)
+// SC = O(log base 2 n)
+
 // int main()
 // {
 //   int n;
@@ -44,6 +47,9 @@ int convertToDecimal(string x)
   return num;
 }
 
+// TC = O(len)
+// SC = O(1)
+
 int main()
 {
   string x;
@@ -51,3 +57,6 @@ int main()
   cout << convertToDecimal(x) << endl;
   return 0;
 }
+
+// num >> k = num / (2^k)  Right shift
+// num << k = num * (2^k)  Left shift
