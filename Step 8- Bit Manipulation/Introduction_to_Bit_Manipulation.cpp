@@ -1,29 +1,53 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string convertToBinary(int n)
+// string convertToBinary(int n)
+// {
+//   string res = "";
+//   while (n > 0)
+//   {
+//     if (n % 2 == 1)
+//     {
+//       res = res + '1';
+//     }
+//     else
+//     {
+//       res += '0';
+//     }
+//     n = n / 2;
+//   }
+//   reverse(res.begin(), res.end());
+//   return res;
+// }
+
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   cout << convertToBinary(n) << endl;
+//   return 0;
+// }
+
+int convertToDecimal(string x)
 {
-  string res = "";
-  while (n > 0)
+  int len = x.length();
+  int num = 0;
+  int power = 1; // 2^0
+  for (int i = len - 1; i >= 0; i--)
   {
-    if (n % 2 == 1)
+    if (x[i] == '1')
     {
-      res = res + '1';
+      num += power;
     }
-    else
-    {
-      res += '0';
-    }
-    n = n / 2;
+    power = power * 2;
   }
-  reverse(res.begin(), res.end());
-  return res;
+  return num;
 }
 
 int main()
 {
-  int n;
-  cin >> n;
-  cout << convertToBinary(n) << endl;
+  string x;
+  cin >> x;
+  cout << convertToDecimal(x) << endl;
   return 0;
 }
