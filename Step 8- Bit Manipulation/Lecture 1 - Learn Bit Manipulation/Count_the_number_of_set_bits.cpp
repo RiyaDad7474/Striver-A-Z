@@ -12,5 +12,10 @@ int main()
     cnt++;
   }
   cout << cnt << endl;
+
+  // for c++ user this is directly available in built in function
+
+  // int ans = __builtin_popcount(n);
+  // cout << ans << endl;
   return 0;
 }
