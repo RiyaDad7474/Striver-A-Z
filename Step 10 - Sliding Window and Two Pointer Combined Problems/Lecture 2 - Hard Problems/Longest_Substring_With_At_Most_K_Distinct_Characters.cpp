@@ -25,6 +25,7 @@ using namespace std;
 //   return maxlen;
 // }
 
+// Optimal Solution
 int subStr(string s, int k)
 {
   int maxlen = 0, l = 0, r = 0;
@@ -34,7 +35,7 @@ int subStr(string s, int k)
   while (r < n)
   {
     mpp[s[r]]++;
-    while (mpp.size() > k)
+    if (mpp.size() > k)
     {
       mpp[s[l]]--;
       if (mpp[s[l]] == 0)
