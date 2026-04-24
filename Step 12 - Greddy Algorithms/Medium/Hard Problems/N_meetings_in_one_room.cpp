@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// TC O(2N)+O(NlogN)
+
 struct data
 {
   int start, end, pos;
