@@ -14,22 +14,30 @@ struct Node
   }
 };
 
-vector<int> ans;
-
-void preorder(Node *root)
-{
-  if (root == NULL)
-    return;
-
-  ans.push_back(root->data);
-  preorder(root->left);
-  preorder(root->right);
-}
-
 vector<int> preorderTraversal(Node *root)
 {
-  preorder(root);
-  return ans;
+  vector<int> preorder;
+  if (root == NULL)
+    return preorder;
+
+  stack<Node *> st;
+  st.push(root);
+  while (!st.empty())
+  {
+
+    root = st.top();
+    st.pop();
+    preorder.push_back(root->data);
+    if (root->right != NULL)
+    {
+      st.push(root->right);
+    }
+    if (root->left != NULL)
+    {
+      st.push(root->left);
+    }
+  }
+  return preorder;
 }
 
 int main()
